@@ -53,14 +53,7 @@
 								<form:errors path="email" cssClass="alert alert-danger"/>
 							</div>
 							<div class="6u$ 12u$(xsmall)">
-								<c:choose>
-									<c:when test="${pwd != \"\"}">
-								    	<form:input path="pwd" placeholder="Password" size="30"/>
-								  	</c:when>
-								  	<c:otherwise>
-								    	<form:password path="pwd" placeholder="Password" size="30"/>
-								  	</c:otherwise>
-								</c:choose>
+						    	<form:input path="pwd" placeholder="Password" size="30"/>
 								<form:errors path="pwd" cssClass="alert alert-danger"/>
 							</div>
 							<div class="6u 12u$(xsmall)">

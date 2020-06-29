@@ -23,7 +23,9 @@
 		<ul class="links">
 			<li><a href="home">Home</a></li>
 			<% if (user != null) { %>
-				<li><a href="listWorkers">Lista de trabajadores</a></li>
+				<% if (type == 1 || type == 2) { %>
+					<li><a href="listWorkers">Lista de trabajadores</a></li>
+				<%} %>
 				<% if (type == 1) { %>
 					<li><a href="log">Lista de accesos</a></li>
 				<%} %>

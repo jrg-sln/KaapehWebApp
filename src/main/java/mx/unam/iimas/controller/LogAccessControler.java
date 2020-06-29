@@ -13,22 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import mx.unam.iimas.model.LogAccess;
 import mx.unam.iimas.service.LogAccessService;
+import mx.unam.iimas.service.PermissionService;
 
 @Controller
 public class LogAccessControler {
 	
 	@Autowired
-	private LogAccessService service;
+	private LogAccessService logService;
+	
+	@Autowired
+	private PermissionService permissionService;
 
 	@RequestMapping("/log")
 	public String listWorker(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String user = (String) session.getAttribute("user");
+		String usr = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
-		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
-		service.saveLogAccess(log);
+		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), usr, request.getRequestURI());
+		logService.saveLogAccess(log);
 		
-		List<LogAccess> listAccess = service.getAllLogAccess();
+		if (usr != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
+		
+		List<LogAccess> listAccess = logService.getAllLogAccess();
 		model.addAttribute("accessLog", listAccess);
 		
 		return "list_access";

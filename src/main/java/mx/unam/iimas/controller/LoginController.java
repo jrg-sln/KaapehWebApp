@@ -14,6 +14,7 @@ import mx.unam.iimas.model.LogAccess;
 import mx.unam.iimas.model.User;
 import mx.unam.iimas.model.Worker;
 import mx.unam.iimas.service.LogAccessService;
+import mx.unam.iimas.service.PermissionService;
 import mx.unam.iimas.service.WorkerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class LoginController {
 	@Autowired
 	private LogAccessService logService;
 	
+	@Autowired
+	private PermissionService permissionService;
+	
 	@ModelAttribute("userForm")
 	public User setUserForm() {
 		return new User();
@@ -42,9 +46,14 @@ public class LoginController {
 	public String viewLogin(Map<String, Object> model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String usr = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), usr, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (usr != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		User user = new User();
 		model.put("userForm", user);
@@ -55,9 +64,14 @@ public class LoginController {
 	public String doLogin(@Valid @ModelAttribute("userForm") User userForm, BindingResult result, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String usr = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), usr, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (usr != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		if (result.hasErrors()) {
 			return "login";
@@ -91,9 +105,14 @@ public class LoginController {
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String usr = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), usr, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (usr != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		session.invalidate();
 		

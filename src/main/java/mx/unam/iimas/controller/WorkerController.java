@@ -25,6 +25,7 @@ import mx.unam.iimas.model.Worker;
 import mx.unam.iimas.model.WorkerArea;
 import mx.unam.iimas.model.WorkerType;
 import mx.unam.iimas.service.LogAccessService;
+import mx.unam.iimas.service.PermissionService;
 import mx.unam.iimas.service.WorkerAreaService;
 import mx.unam.iimas.service.WorkerService;
 import mx.unam.iimas.service.WorkerTypeService;
@@ -47,6 +48,9 @@ public class WorkerController {
 	@Autowired
 	private WorkerTypeService typeService;
 	
+	@Autowired
+	private PermissionService permissionService;
+	
 	@InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
@@ -57,16 +61,20 @@ public class WorkerController {
 	public String listWorker(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
 		
-		Integer type = (Integer) session.getAttribute("type");
-		Integer area = (Integer) session.getAttribute("area");
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
+		
 		if (type == 1) {
 			List<Worker> theWorkers = service.getWorkers();
 			model.addAttribute("workers", theWorkers);
 		} else {
+			Integer area = (Integer) session.getAttribute("area");
 			List<Worker> theWorkers = service.getWorkersByArea(area);
 			model.addAttribute("workers", theWorkers);
 		}
@@ -78,9 +86,14 @@ public class WorkerController {
 	public String createNewWorker(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		model.addAttribute("worker", new Worker());
 		
@@ -91,9 +104,14 @@ public class WorkerController {
 	public String saveWorker(@Valid @ModelAttribute("worker") Worker worker, BindingResult result, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		if (result.hasErrors()) {
             return "add_worker";
@@ -122,9 +140,14 @@ public class WorkerController {
 	public String updateWorker(@RequestParam("workerId") long id, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		Worker worker = service.getWorker(id);	
 		model.addAttribute("worker", worker);
@@ -135,9 +158,14 @@ public class WorkerController {
 	public String saveUpdateWorker(@Valid @ModelAttribute("worker") Worker worker, BindingResult result, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		if (result.hasErrors()) {
             return "update_worker";
@@ -170,9 +198,14 @@ public class WorkerController {
 	public String deleteCustomer(@RequestParam("workerId") long id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("user");
+		Integer type = (Integer) session.getAttribute("type");
 		
 		LogAccess log = new LogAccess(request.getRemoteAddr(), LocalDateTime.now().toString(), user, request.getRequestURI());
 		logService.saveLogAccess(log);
+		
+		if (user != null && !permissionService.hasAccessTo(type, request.getRequestURI())) {
+			return "redirect:/home";
+		}
 		
 		service.deleteWorker(id);
 		return "redirect:/listWorkers";
