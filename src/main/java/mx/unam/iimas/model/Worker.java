@@ -22,7 +22,7 @@ public class Worker {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "Favor de ingresar un correo electrónico")
+	@NotEmpty(message = "Favor de ingresar un correo electrónico")
     @Email(message = "Favor de ingresar un correo electrónico válido")
 	private String email;
 	

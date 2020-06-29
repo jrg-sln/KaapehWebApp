@@ -17,11 +17,11 @@ CREATE TABLE worker_type (
 );
 
 INSERT INTO worker_type (name, description) VALUES ('ADMINISTRADOR', 'Administrador general del sistema, tiene acceso a CRUD general');
-INSERT INTO worker_type (name, description) VALUES ('SUPERVISOR', 'Acceso a consulta de otros usuarios y asistencia.');
-INSERT INTO worker_type (name, description) VALUES ('TRABAJADOR', 'Acceso a asistencia.');
+INSERT INTO worker_type (name, description) VALUES ('SUPERVISOR', 'Acceso a consulta de otros usuarios del área.');
+INSERT INTO worker_type (name, description) VALUES ('TRABAJADOR', 'Acceso al sistema.');
 
 -- Los trabajadores van a estar asociados a una área
-CREATE TABLE area_depto (
+CREATE TABLE worker_area (
     id          serial PRIMARY KEY,
     name        VARCHAR(20) NOT NULL,
     description VARCHAR(100) NOT NULL,
@@ -51,5 +51,3 @@ CREATE TABLE worker (
 -- contraseña adminadmin
 insert into worker (email, pwd, firstname, lastname1, usertype, userarea, vigent)
 values ('admin@cd.mx', 'd82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892', 'System', 'Administrator', 1, 1, 't');
-
--- update worker set pwd='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' where id=1

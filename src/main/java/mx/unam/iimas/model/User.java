@@ -54,9 +54,7 @@ public class User {
 		return hexString.toString();
 	}
 	
-	/*public static String encrypt(String str) {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-        // password a cifrar: str
-        return bCryptPasswordEncoder.encode(str);
-	}*/
+	public static void letAccess(String user, String resource) {
+		
+	}
 }

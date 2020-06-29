@@ -22,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mx.unam.iimas.model.Worker;
+import mx.unam.iimas.model.WorkerArea;
+import mx.unam.iimas.model.WorkerType;
 import mx.unam.iimas.service.LogAccessService;
+import mx.unam.iimas.service.WorkerAreaService;
 import mx.unam.iimas.service.WorkerService;
+import mx.unam.iimas.service.WorkerTypeService;
 import mx.unam.iimas.model.LogAccess;
 import mx.unam.iimas.model.User;
 
@@ -36,6 +40,12 @@ public class WorkerController {
 	
 	@Autowired
 	private LogAccessService logService;
+	
+	@Autowired
+	private WorkerAreaService areaService;
+	
+	@Autowired
+	private WorkerTypeService typeService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -172,9 +182,11 @@ public class WorkerController {
 	@ModelAttribute("areasList")
     public Map<Integer, String> getUserAreas() {
 		Map<Integer, String > userAreas = new HashMap<Integer, String>();
-		userAreas.put(1, "DIRECCION");
-		userAreas.put(2, "SISTEMAS");
-		userAreas.put(3, "CONTABILIDAD");
+		
+		List<WorkerArea> la = areaService.getWorkerAreas();
+		for (WorkerArea wa : la) {
+			userAreas.put(wa.getId(), wa.getName());
+		}
 		
 		return userAreas;
 	}
@@ -182,9 +194,11 @@ public class WorkerController {
 	@ModelAttribute("typesList")
     public Map<Integer, String> getUserTypes() {
 		Map<Integer, String > userTypes = new HashMap<Integer, String>();
-		userTypes.put(1, "ADMINISTRADOR");
-		userTypes.put(2, "SUPERVISOR");
-		userTypes.put(3, "TRABAJADOR");
+		
+		List<WorkerType> lt = typeService.getWorkerTypes();
+		for (WorkerType wt : lt) {
+			userTypes.put(wt.getId(), wt.getName());
+		}
 		
 		return userTypes;
 	}

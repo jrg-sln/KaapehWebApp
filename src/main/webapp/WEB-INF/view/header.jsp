@@ -25,8 +25,6 @@
 			<% if (user != null) { %>
 				<li><a href="listWorkers">Lista de trabajadores</a></li>
 				<% if (type == 1) { %>
-					<li><a href="#">Tipos de usuario</a></li>
-					<li><a href="#">&Aacute;reas de la empresa</a></li>
 					<li><a href="log">Lista de accesos</a></li>
 				<%} %>
 			<%} %>

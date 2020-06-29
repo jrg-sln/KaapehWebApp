@@ -45,7 +45,9 @@
 			      	</c:if>
 			      	<div class="content">
 			      		<ul class="actions">
-							<li><a href="addWorker" class="button special">Agregar trabajador</a></li>
+			      			<% if (type == 1) { %>
+								<li><a href="addWorker" class="button special">Agregar trabajador</a></li>
+							<%} %>
 						</ul>
 			      	</div>
 					<div class="table-wrapper">
@@ -79,8 +81,15 @@
 										<td>${worker.firstName} ${worker.secondName}</td>
 										<td>${worker.lastName1}</td>
 										<td>${worker.lastName2}</td>
-										<td>${worker.usertype}</td>
-										<td>${worker.userarea}</td>
+										<td>${areasList.get(worker.usertype)}</td>
+										<c:choose>
+											<c:when test="${worker.userarea == null}">
+												<td>TODAS</td>
+											</c:when>
+											<c:otherwise>
+												<td>${typesList.get(worker.userarea)}</td>
+											</c:otherwise>
+										</c:choose>
 										<td>${worker.vigent}</td>
 										<td>
 											<a href="${updateLink}">Editar</a> | <a href="${deleteLink}"

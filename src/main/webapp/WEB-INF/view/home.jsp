@@ -26,10 +26,10 @@
 	<!-- One -->
 	<section id="one" class="wrapper style1 special">
 		<div class="inner">
-			<h2>Control de asistencia</h2>
+			<h2>Control de trabajadores</h2>
 			<figure>
 			    <blockquote>
-			        El objetivo de la aplicación es llevar el control de asistencia de los trabajadores de una empresa.
+			        El objetivo de la aplicación es llevar el control de los trabajadores de una empresa asignando un rol y un área.
 			    </blockquote>
 			    <footer>
 			        <cite class="author">Jorge Solano</cite>
@@ -45,7 +45,7 @@
 			<div class="flex-item left">
 				<div>
 					<h3>Inicio de sesión</h3>
-					<p>Manejo de inicio y cierre de sesi&oacute;n<br /> con perfiles de administrador y usuario.</p>
+					<p>Manejo de inicio y cierre de sesi&oacute;n con <br /> perfiles de administrador, supervisor y usuario.</p>
 				</div>
 				<div>
 					<h3>Bit&aacute;cora de acceso</h3>
@@ -57,12 +57,12 @@
 			</div>
 			<div class="flex-item right">
 				<div>
-					<h3>Registro de usuarios</h3>
-					<p>Permite operaciones CRUD <br /> sobre las tablas de usuario y trabajador.</p>
+					<h3>Registro de trabajadores</h3>
+					<p>Permite operaciones CRUD <br /> sobre la tabla de trabajador.</p>
 				</div>
 				<div>
-					<h3>Registro de asistencia</h3>
-					<p>Permite operación CR <br /> en la tabla de asistencia.</p>
+					<h3>Consulta del log</h3>
+					<p>Permite operaciones CR <br /> en la bitácora del sistema.</p>
 				</div>
 			</div>
 		</div>
