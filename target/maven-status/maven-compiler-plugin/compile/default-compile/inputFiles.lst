@@ -1,0 +1,11 @@
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/config/AppConfig.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/controller/LoginController.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/service/WorkerServiceImpl.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/controller/HomeController.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/controller/WorkerController.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/dao/WorkerDAO.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/dao/WorkerDAOImpl.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/model/Worker.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/service/WorkerService.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/model/User.java
+/Users/jrg_sln/eclipse-workspace/KaapehApp/src/main/java/mx/unam/iimas/config/AppInitializer.java

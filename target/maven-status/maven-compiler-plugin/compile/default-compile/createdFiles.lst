@@ -1,0 +1,11 @@
+mx/unam/iimas/model/User.class
+mx/unam/iimas/service/WorkerServiceImpl.class
+mx/unam/iimas/dao/WorkerDAO.class
+mx/unam/iimas/controller/HomeController.class
+mx/unam/iimas/config/AppInitializer.class
+mx/unam/iimas/controller/WorkerController.class
+mx/unam/iimas/model/Worker.class
+mx/unam/iimas/dao/WorkerDAOImpl.class
+mx/unam/iimas/controller/LoginController.class
+mx/unam/iimas/service/WorkerService.class
+mx/unam/iimas/config/AppConfig.class
